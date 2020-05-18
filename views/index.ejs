@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <title>URL Shortener</title>
+  </head>
+  <body>
+    <% if(typeof shortUrl !== 'undefined') { %>
+    <div id="darkOverlay" class="dark-overlay">
+      <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Your shorten URL</h5>
+              <button
+                id="closeModal"
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><%= shortUrl %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="my-container">
+      <div class="card bg-dark text-light">
+        <div class="card-header text-center">
+          URL SHORTENER
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Paste URL you want to be shorten</h5>
+          <form action="/shortUrl" method="POST">
+            <div class="form-group">
+              <input
+                name="url"
+                type="text"
+                class="form-control"
+                aria-describedby="urlHelper"
+              />
+              <small id="urlHelper" class="form-text text-muted"
+                >We'll never share your email with anyone else.</small
+              >
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const closeModalBtn = document.getElementById('closeModal');
+      const darkOverlay = document.getElementById('darkOverlay');
+
+      closeModalBtn.addEventListener('click', () => {
+        darkOverlay.style.display = 'none';
+      });
+    </script>
+  </body>
+</html>
